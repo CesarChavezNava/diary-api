@@ -1,14 +1,14 @@
-import { DairyId, DiaryComment, DiaryDate, DiaryVisibility, DiaryWeather } from "../value-objects";
+import { DiaryId, DiaryComment, DiaryDate, DiaryVisibility, DiaryWeather } from "../value-objects";
 
 export class DiaryInput {
-    readonly id: DairyId;
+    readonly id: DiaryId;
     readonly date: DiaryDate;
     readonly comment: DiaryComment;
     readonly weather: DiaryWeather;
     readonly visibility: DiaryVisibility;
 
     constructor(
-        id: DairyId,
+        id: DiaryId,
         date: DiaryDate,
         comment: DiaryComment,
         weather: DiaryWeather,

@@ -1,7 +1,7 @@
 import { Visibility, Weather } from "../../domain/enums";
 import { Diary, DiaryInput } from "../../domain/entities";
 import { DiaryRepository } from "../../domain/repositories";
-import { DairyId } from "../../domain/value-objects";
+import { DiaryId } from "../../domain/value-objects";
 
 export class LocalDiaryRepository implements DiaryRepository {
     static data: Diary[] = [
@@ -38,11 +38,11 @@ export class LocalDiaryRepository implements DiaryRepository {
         });
     }
 
-    async delete(id: DairyId): Promise<void> {
+    async delete(id: DiaryId): Promise<void> {
         LocalDiaryRepository.data = LocalDiaryRepository.data.filter(diary => diary.id !== id.value);
     }
 
-    async find(id: DairyId): Promise<Diary> {
+    async find(id: DiaryId): Promise<Diary> {
         return LocalDiaryRepository.data.find(diary => diary.id === id.value);
     }
     

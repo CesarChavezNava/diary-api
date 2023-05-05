@@ -1,7 +1,7 @@
 import { DiaryAdder, DiaryDeleter, ForAddingDiary, ForDeletingDiary } from "../../src/application";
 import { Diary, DiaryInput } from "../../src/domain/entities";
 import { DiaryRepository } from "../../src/domain/repositories";
-import { DairyId, DiaryComment, DiaryDate, DiaryVisibility, DiaryWeather } from "../../src/domain/value-objects";
+import { DiaryId, DiaryComment, DiaryDate, DiaryVisibility, DiaryWeather } from "../../src/domain/value-objects";
 import { Visibility, Weather } from "../../src/domain/enums";
 import { BaseError, NotFoundError } from "../../src/domain/exceptions";
 
@@ -25,7 +25,7 @@ beforeEach(() => {
 describe('add diary', () => {
     test('should return empty result', async () => {
         const diary = new DiaryInput(
-            new DairyId(10),
+            new DiaryId(10),
             new DiaryDate('2021-11-11'),
             new DiaryComment('Prueba'),
             new DiaryWeather(Weather.Stormy),
@@ -39,7 +39,7 @@ describe('add diary', () => {
 
     test('should return "Diary 1 already exists"', async () => {
         const diary = new DiaryInput(
-            new DairyId(1),
+            new DiaryId(1),
             new DiaryDate('2021-11-11'),
             new DiaryComment('Prueba'),
             new DiaryWeather(Weather.Stormy),
@@ -57,7 +57,7 @@ describe('add diary', () => {
 
 describe('delete diary', () => {
     test('should return empty result', async () => {
-        const id = new DairyId(1);
+        const id = new DiaryId(1);
 
         await diaryDeleter.delete(id);
         expect(mockDiaryRepository.add).toHaveBeenCalledWith(id);
@@ -67,7 +67,7 @@ describe('delete diary', () => {
     test('should return "Diary 5 not found"', async () => {
         mockDiaryRepository.find.mockResolvedValueOnce(undefined);
 
-        await expect(diaryDeleter.delete(new DairyId(5))).rejects.toThrow(
+        await expect(diaryDeleter.delete(new DiaryId(5))).rejects.toThrow(
             new NotFoundError('Diary 5 not found.')
         );
     })
