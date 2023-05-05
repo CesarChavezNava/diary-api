@@ -58,10 +58,13 @@ describe('add diary', () => {
 describe('delete diary', () => {
     test('should return empty result', async () => {
         const id = new DiaryId(1);
+        mockDiaryRepository.find.mockResolvedValueOnce(
+            new Diary(1, '2022-11-11', Weather.Windy, Visibility.good, 'Lo que sea')
+        );
 
         await diaryDeleter.delete(id);
-        expect(mockDiaryRepository.add).toHaveBeenCalledWith(id);
-        expect(mockDiaryRepository.add).toBeCalledTimes(1);
+        expect(mockDiaryRepository.delete).toHaveBeenCalledWith(id);
+        expect(mockDiaryRepository.delete).toBeCalledTimes(1);
     });
 
     test('should return "Diary 5 not found"', async () => {
