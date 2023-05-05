@@ -3,6 +3,7 @@ import { DiaryService } from '../services';
 import { localComposition } from '../compositions';
 import { DiaryDto } from '../dtos';
 import { HttpError } from '../helpers';
+import { validate } from '../middlewares';
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validate,  async (req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         const { id, date, comment, weather, visibility } = req.body;

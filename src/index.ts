@@ -12,6 +12,8 @@ app.get('/ping', (_, res) => {
 
 app.use('/api/diaries', router);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
 })
+
+export  { app, server }
