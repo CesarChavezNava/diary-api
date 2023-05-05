@@ -5,9 +5,9 @@ import { DiaryDto } from '../dtos';
 import { HttpError } from '../helpers';
 import { validate } from '../middlewares';
 
-const router = express.Router();
+export const diaryRouter = express.Router();
 
-router.get('/', async (_req, res) => {
+diaryRouter.get('/', async (_req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         const dtos: DiaryDto[] = await diaryService.findAll();
@@ -19,7 +19,7 @@ router.get('/', async (_req, res) => {
     
 });
 
-router.get('/:id', async (req, res) => {
+diaryRouter.get('/:id', async (req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         const dto: DiaryDto = await diaryService.find(+req.params.id);
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', validate,  async (req, res) => {
+diaryRouter.post('/', validate,  async (req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         const { id, date, comment, weather, visibility } = req.body;
@@ -48,7 +48,7 @@ router.post('/', validate,  async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+diaryRouter.put('/:id', async (req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         const { date, comment, weather, visibility } = req.body;
@@ -67,7 +67,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+diaryRouter.delete('/:id', async (req, res) => {
     try {
         const diaryService: DiaryService = localComposition().diaryService;
         await diaryService.delete(+req.params.id);
@@ -77,5 +77,3 @@ router.delete('/:id', async (req, res) => {
         HttpError.send(res, error);
     }
 });
-
-export default router;

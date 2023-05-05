@@ -1,5 +1,6 @@
 import * as express from 'express';
-import router from './infrastructure/routes/diary.routes';
+import { authRouter, diaryRouter } from './infrastructure/routes';
+//import { authMiddleware } from './infrastructure/middlewares';
 
 const app = express();
 app.use(express.json());
@@ -10,7 +11,8 @@ app.get('/ping', (_, res) => {
     res.send('pong');
 });
 
-app.use('/api/diaries', router);
+app.use('/api/auth', authRouter)
+app.use('/api/diaries'/*, authMiddleware.validate*/, diaryRouter);
 
 const server = app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
